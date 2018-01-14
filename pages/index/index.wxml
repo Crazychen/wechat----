@@ -1,0 +1,23 @@
+<!--index.wxml-->
+  <!-- <view class="userinfo">
+    <block wx:if="{{!hasUserInfo && canIUse}}"> 
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="../../resource/imgs/touxiang.png" background-size="cover"></image>
+    </block>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    </block>
+  </view> -->
+
+<view class='imgs'> 
+    <image  mode="widthFix" bindload='imgLoaded' bindtap='imgPreview' src="{{img_url}}"></image>
+</view>
+<view class="weui-footer weui-footer_fixed-bottom">
+<view class="weui-footer__text">图片来源：Reddit</view>
+<view bindtap='copyValue' class="weui-footer__text">如有侵权联系删除：chen2a2b@163.com</view>
+</view>
+
+<view class='help' bindtap='gotoInfo'><image style='width:50rpx; height:50rpx' src='../../resource/imgs/gantanhao2.png'></image></view>
+
+<!-- <view class="button-sp-area nextButton">
+  <button style='width: 30%' class="weui-btn" bindtap='nextImg' type="primary" plain="true">瞄</button>
+</view> -->

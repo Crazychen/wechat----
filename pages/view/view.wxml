@@ -1,0 +1,4 @@
+<!--pages/view/view.wxml-->
+<view wx:for="{{imgs}}" wx:key="url" style='text-align:center'>
+<image src='{{item}}' mode='widthFix' data-imgsrc="{{item}}" bindtap='imgPreview'></image>
+</view>
