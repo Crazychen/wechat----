@@ -13,7 +13,7 @@
 </view>
 <view class="weui-footer weui-footer_fixed-bottom">
 <view class="weui-footer__text">图片来源：Reddit</view>
-<view bindtap='copyValue' class="weui-footer__text">如有侵权联系删除：chen2a2b@163.com</view>
+<view bindtap='copyValue' class="weui-footer__text">如有侵权联系删除：miaomiao3098@163.com</view>
 </view>
 
 <view class='help' bindtap='gotoInfo'><image style='width:50rpx; height:50rpx' src='../../resource/imgs/gantanhao2.png'></image></view>

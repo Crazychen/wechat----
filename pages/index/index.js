@@ -37,6 +37,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
+
   onPullDownRefresh: function () {
     var i = ++index < imgs.length ? index : 0;
     // wx.showLoading({
@@ -47,7 +48,29 @@ Page({
       img_url: imgs[i].url
     })
     if (i == 0) {
+      wx.showModal({
+        title: 'Tips',
+        content: '没有啦，待会再来~~',
+        showCancel: false
+      })
       imgsViewed.splice(0, imgsViewed.length);
+      var t = this;
+      wx.showLoading({
+        title: '正在加载...',
+      });
+      console.log("refreshing...")
+      wx.request({
+        url: config.service.getGifUrl,
+        success: function (data) {
+          imgs = data.data.result;
+          t.setData(
+            {
+              img_url: data.data.result[i].url,
+            }
+          )
+          wx.hideLoading();
+        }
+      });
     }
     imgsViewed.push(imgs[i].url);
     index = i;
@@ -68,7 +91,7 @@ Page({
 
   copyValue: function () {
     wx.setClipboardData({
-      data: 'chen2a2b@163.com',
+      data: 'miaomiao3098@163.com',
       success: function (res) {
         wx.showToast({
           title: '拷贝email成功~',
@@ -87,7 +110,7 @@ Page({
   onShareAppMessage: function (res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
-      console.log(res.target)
+      console.log("xx"+res.target)
     }
     return {
       title: '喵喵',
@@ -104,81 +127,47 @@ Page({
     }
   },
 
-  actionImg: function () {
-    wx.showActionSheet({
-      itemList: ['收藏'],
-      success: function (res) {
-        if (!res.cancel) {
-          console.log(res.tapIndex)
-          if (res.tapIndex == 1) {
-            saveImg(imgs[index].url);
-          }
-          else if (res.tapIndex == 0) {
-            wx.setStorage({
-              key: imgs[index].url,
-              data: 'obj',
-              success: function () {
-                wx.showToast({
-                  title: '收藏成功',
-                })
-              }
-            });
-          }
-        }
-      }
-    });
-  },
-
-  nextImg: function () {
-    var i = ++index < imgs.length ? index : 0;
-    wx.showLoading({
-      title: '正在加载...',
-    });
-    console.log("index=" + index);
-    this.setData({
-      img_url: imgs[i].url
-    })
-    index = i;
-  },
+  // actionMenu: function () {
+  //   wx.showActionSheet({
+  //     itemList: ['转发'],
+  //     success: function (res) {
+  //       if (!res.cancel) {
+  //         console.log(res.tapIndex)
+  //         if (res.tapIndex == 0) {
+  //           wx.showShareMenu({
+  //             withShareTicket: true,
+  //             complete: function ()
+  //             {
+  //               return {
+  //                 title: '喵喵',
+  //                 path: 'pages/index/index?url=' + encodeURIComponent(imgs[index].url),
+  //                 success: function (res) {
+  //                   // 转发成功
+  //                   wx.showToast({
+  //                     title: '转发成功',
+  //                   })
+  //                 },
+  //                 fail: function (res) {
+  //                   // 转发失败
+  //                 }
+  //               }
+  //             }
+  //           })
+  //         }
+  //       }
+  //     }
+  //   });
+  // },
 
   onLoad: function (o) {
-    console.log("xxx="+o.url)
-    // if (app.globalData.userInfo) {
-    //   this.setData({
-    //     userInfo: app.globalData.userInfo,
-    //     hasUserInfo: true
-    //   })
-    // } else if (this.data.canIUse) {
-    //   // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-    //   // 所以此处加入 callback 以防止这种情况
-    //   app.userInfoReadyCallback = res => {
-    //     this.setData({
-    //       userInfo: res.userInfo,
-    //       hasUserInfo: true
-    //     })
-    //   }
-    // } else {
-    // 在没有 open-type=getUserInfo 版本的兼容处理
-    // wx.getUserInfo({
-    //   success: res => {
-    //     app.globalData.userInfo = res.userInfo
-    //     this.setData({
-    //       userInfo: res.userInfo,
-    //       hasUserInfo: true
-    //     });
-    //   }
-    // })
-    // }
-
     var value = wx.getStorageSync('new')
-    if (!value)
-    {
+    if (!value) {
       wx.showModal({
         showCancel: false,
         title: 'Tips',
         content: '下拉页面查看下一张图片~',
-        success: function()
-        {
+        confirmText: '知道了',
+        success: function () {
           wx.setStorage({
             key: 'new',
             data: 'true',
