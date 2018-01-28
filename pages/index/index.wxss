@@ -1,25 +1,31 @@
 /**index.wxss**/
-button{
-  width: 30rpx;
+
+body {
+  text-align: center;
 }
+
+/* button{
+  width: 30rpx;
+} */
+
 .userinfo {
   margin-left: 50rpx;
   margin-top: 20rpx;
   margin-bottom: 20rpx;
 }
 
-.imgs
-{
+.imgs {
   /* margin-bottom: 15rpx;
   z-index: 1; */
-  text-align:center;
-  margin-top: 20rpx;
-  /* height: 100%;
+  text-align: center;
+  margin-top: 30rpx;
+  width: 100%;
+  /* border: 1rpx solid #cdcdcd;
+  background-color: #cdcdcd; *//* height: 100%;
   width: 100%; */
 }
 
-.help
-{
+.help {
   position: fixed;
   bottom: 10rpx;
   right: 20rpx;
@@ -31,11 +37,25 @@ button{
   border-radius: 50%;
 }
 
-.nextButton
-{
+.nextButton {
   position: fixed;
   width: 100%;
   z-index: 1000;
   bottom: 100rpx;
 }
 
+#shareBtn {
+  outline: none;
+  border-style: none;
+  position: fixed;
+  right: 20rpx;
+  bottom: 20rpx;
+  padding: 0 0 0 0;
+}
+
+#loadImg
+{
+  position: fixed;
+  z-index: 0;
+  display: none;
+}

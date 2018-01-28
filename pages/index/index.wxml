@@ -1,5 +1,5 @@
 <!--index.wxml-->
-  <!-- <view class="userinfo">
+<!-- <view class="userinfo">
     <block wx:if="{{!hasUserInfo && canIUse}}"> 
       <image bindtap="bindViewTap" class="userinfo-avatar" src="../../resource/imgs/touxiang.png" background-size="cover"></image>
     </block>
@@ -8,15 +8,24 @@
     </block>
   </view> -->
 
-<view class='imgs'> 
-    <image  mode="widthFix" bindload='imgLoaded' bindtap='imgPreview' src="{{img_url}}"></image>
+<view class='imgs'>
+  <image id='main' class="weui-article__img" mode="widthFix" bindload='imgLoaded' bindtap='imgPreview' src="{{img_url}}"></image>
+</view>
+<view>
+  <image id='loadImg' class="weui-article__img" mode="widthFix" bindload='imgLoaded' bindtap='imgPreview' src="{{img_url2}}"></image>
 </view>
 <view class="weui-footer weui-footer_fixed-bottom">
-<view class="weui-footer__text">图片来源：Reddit</view>
-<view bindtap='copyValue' class="weui-footer__text">如有侵权联系删除：miaomiao3098@163.com</view>
+  <view class="weui-footer__text">图片来源：LOFTER</view>
+  <view bindtap='copyValue' class="weui-footer__text">侵删联系：miaomiao3098@163.com</view>
 </view>
 
-<view class='help' bindtap='gotoInfo'><image style='width:50rpx; height:50rpx' src='../../resource/imgs/gantanhao2.png'></image></view>
+<view class='help' bindtap='gotoInfo'>
+  <image style='width:50rpx; height:50rpx' src='../../resource/imgs/gantanhao2.png'></image>
+</view>
+
+<!-- <button open-type="share" id='shareBtn'>
+  <image src='../../resource/imgs/fenxiang.png' mode='scaleToFill' style='width:70rpx;height:70rpx;'></image>
+</button> -->
 
 <!-- <view class="button-sp-area nextButton">
   <button style='width: 30%' class="weui-btn" bindtap='nextImg' type="primary" plain="true">瞄</button>

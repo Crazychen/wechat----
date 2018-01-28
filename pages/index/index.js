@@ -33,6 +33,7 @@ var saveImg = function (path) {
 Page({
   data: {
     img_url: '',
+    img_url2: '',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -45,7 +46,7 @@ Page({
     // });
     console.log("index=" + index);
     this.setData({
-      img_url: imgs[i].url
+      img_url2: imgs[i].url
     })
     if (i == 0) {
       wx.showModal({
@@ -65,7 +66,7 @@ Page({
           imgs = data.data.result;
           t.setData(
             {
-              img_url: data.data.result[i].url,
+              img_url2: data.data.result[i].url,
             }
           )
           wx.hideLoading();
@@ -78,11 +79,17 @@ Page({
 
   imgLoaded: function (e) {
     wx.stopPullDownRefresh();
+    wx.hideLoading();
+    this.setData(
+      {
+        img_url: imgs[index].url,
+      }
+    )
   },
 
   gotoInfo: function () {
     wx.previewImage({
-      urls: ["http://imglf4.nosdn.127.net/img/L2NybEptNG1rRnlXaW0xZW03Q0cwalQxY3NqMTZzUk5HZDlJVE5nSGpMbUswRnB2ZlJsS1dBPT0.jpg"]
+      urls: ["http://imglf4.nosdn.127.net/img/L2NybEptNG1rRndWSGJDTWs5bCtUcGdxNFFLbGxCNkpadlZsb25GM0lQWVJwb2lMZkJDZnF3PT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg"]
     })
     // wx.showToast({
     //   title: '喵~',
@@ -127,37 +134,20 @@ Page({
     }
   },
 
-  // actionMenu: function () {
-  //   wx.showActionSheet({
-  //     itemList: ['转发'],
-  //     success: function (res) {
-  //       if (!res.cancel) {
-  //         console.log(res.tapIndex)
-  //         if (res.tapIndex == 0) {
-  //           wx.showShareMenu({
-  //             withShareTicket: true,
-  //             complete: function ()
-  //             {
-  //               return {
-  //                 title: '喵喵',
-  //                 path: 'pages/index/index?url=' + encodeURIComponent(imgs[index].url),
-  //                 success: function (res) {
-  //                   // 转发成功
-  //                   wx.showToast({
-  //                     title: '转发成功',
-  //                   })
-  //                 },
-  //                 fail: function (res) {
-  //                   // 转发失败
-  //                 }
-  //               }
-  //             }
-  //           })
-  //         }
-  //       }
-  //     }
-  //   });
-  // },
+  actionMenu: function () {
+    wx.showActionSheet({
+      itemList: ['转发'],
+      success: function (res) {
+        if (!res.cancel) {
+          console.log(res.tapIndex)
+          if (res.tapIndex == 0) {
+            
+            
+          }
+        }
+      }
+    });
+  },
 
   onLoad: function (o) {
     var value = wx.getStorageSync('new')
@@ -199,7 +189,6 @@ Page({
           )
           imgsViewed.push(data.data.result[index].url);
         }
-        wx.hideLoading();
       }
     });
   },
